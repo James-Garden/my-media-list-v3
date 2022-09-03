@@ -1,0 +1,4 @@
+django
+django_compressor
+django-libsass
+psycopg2
