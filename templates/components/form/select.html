@@ -1,0 +1,10 @@
+<select
+    class="form-select"
+    {% if aria_label %}  aria-label="{{ aria_label }}"  {% endif %}
+>
+
+    {% for option_value, option_text in options.items %}
+          <option value="{{ key }}">{{ value }}</option>
+    {% endfor %}
+
+</select>
