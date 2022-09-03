@@ -5,21 +5,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block html_title %}{% endblock %}</title>
+    <title>{% block html_title %}{{ page_title }}{% endblock %}</title>
     {% compress css %}
         <link rel="stylesheet" type="text/x-scss" href="{% static "stylesheets/main.scss" %}"/>
     {% endcompress %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block extra_head %}{% endblock %}
 </head>
-<body>
-    {% include 'components/header.html' %}
-    <div class="container">
-        This is the container from layout.html
-        {% block content %}
+<body class="bg-dark">
+    <main class="bg-dark">
+        <header class="mb-4">
+            {% include 'components/header.html' %}
+        </header>
+        <main class="mb-4">
+            <div class="container bg-light border-primary rounded text-dark p-lg-3">
+                <h1 class="display-1 mb-4">{% block page_title %}{{ page_title }}{% endblock %}</h1>
+                {% block content %}
 
-        {% endblock %}
-    </div>
-    {% include 'components/footer.html' %}
+                {% endblock %}
+            </div>
+        </main>
+        <footer class="m-0 text-light border-top border-secondary">
+            {% include 'components/footer.html' %}
+        </footer>
+    </main>
 </body>
 </html>

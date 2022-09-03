@@ -1,4 +1,7 @@
-// Order of these import statements matter, for overrides to work, bootstrap *must* be at the bottom
+// Stylesheets used in page layout
+@import "layout/footer";
 
+// Bootstrap related stylesheets
+// Order of these import statements matter, for overrides to work, bootstrap *must* be at the bottom
 @import "bootstrap/colours";
 @import "../../node_modules/bootstrap/scss/bootstrap";
