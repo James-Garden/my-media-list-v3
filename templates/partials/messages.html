@@ -1,0 +1,6 @@
+{% load component_tags %}
+
+{% for message in messages %}
+    {% alert message=message.0 alert_class=message.1 %}
+{% endfor %}
+
