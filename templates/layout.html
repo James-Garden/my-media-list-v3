@@ -1,5 +1,6 @@
 {% load compress %}
 {% load static %}
+{% load message_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,18 +24,21 @@
 </head>
 <body class="bg-dark">
     <header class="mb-4">
-        {% include 'components/header.html' %}
+        {% include 'partials/header.html' %}
     </header>
     <main class="mb-4">
         <div class="container bg-light border-primary rounded text-dark p-lg-3">
             <h1 class="display-1 mb-4">{% block page_title %}{{ page_title }}{% endblock %}</h1>
+            {% if messages %}
+                {% render_messages messages %}
+            {% endif %}
             {% block content %}
 
             {% endblock %}
         </div>
     </main>
     <footer class="m-0 text-light border-top border-secondary">
-        {% include 'components/footer.html' %}
+        {% include 'partials/footer.html' %}
     </footer>
 </body>
 </html>
