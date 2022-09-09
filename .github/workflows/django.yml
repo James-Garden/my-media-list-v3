@@ -17,7 +17,7 @@ jobs:
           POSTGRES_PASSWORD: dev
           POSTGRES_DB: my_media_list
           POSTGRES_PORT: 5432
-          POSTGRES_HOST: postgres
+          POSTGRES_HOST: 127.0.0.1
         # Set health checks to wait until postgres has started        
         options: >-
           --health-cmd pg_isready 
