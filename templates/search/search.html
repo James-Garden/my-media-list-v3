@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load search_tags %}
+
+{% block content %}
+  {% if page_obj %}
+    {% for result in page_obj %}
+      {% include 'search/user-card.html' with user=result %}
+    {% endfor %}
+  {% else %}
+    <div class="row m-5">
+      <div class="col text-center align-content-center">
+        <em>No results found for '{{ query }}'</em>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-auto">
+        {% pagination %}
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+
+{% endblock %}

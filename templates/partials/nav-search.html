@@ -1,22 +1,23 @@
-<form class="d-flex" role="search" action="{{ searchUrl }}" method="get">
-    <div class="input-group">
-        <select id="search-type-select" class="form-control-sm bg-dark border-dark text-light">
-            <option selected value="ALL_MEDIA">All Media</option>
-            <option value="TV">TV Series</option>
-            <option value="FILMS">Films</option>
-            <option value="BOOKS">Books</option>
-            <option disabled>────────────</option>
-            <option value="USERS">Users</option>
-            <option value="PEOPLE">People</option>
-            <option value="CHARACTERS">Characters</option>
-            <option value="COMPANIES">Companies</option>
-        </select>
-        <label for="search-type-select" hidden="hidden">Search type</label>
-        <input class="form-control-lg border-dark input-group-text bg-dark text-light" type="search" placeholder="Search" aria-label="Search" name="query" style="z-index: 5">
-        <button class="btn btn-dark" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-            </svg>
-        </button>
-    </div>
+<form class="d-flex" role="search" action="{% url "search:index" %}" method="get">
+  <input type="hidden" name="referer" value="{{ request.path }}">
+  <div class="input-group">
+    <select id="search-type-select" class="form-control-sm bg-dark border-dark text-light" name="type">
+      <option selected value="all">All Media</option>
+      <option value="tv">TV Series</option>
+      <option value="films">Films</option>
+      <option value="books">Books</option>
+      <option disabled>──────────────</option>
+      <option value="users">Users</option>
+      <option value="people">People</option>
+      <option value="characters">Characters</option>
+      <option value="companies">Companies</option>
+    </select>
+    <label for="search-type-select" hidden="hidden">Search type</label>
+    <input class="form-control-lg border-dark input-group-text bg-dark text-light" type="search" placeholder="Search" aria-label="Search" name="query" style="z-index: 5">
+    <button class="btn btn-dark" type="submit">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+      </svg>
+    </button>
+  </div>
 </form>
