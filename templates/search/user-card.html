@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-auto">
+      {#   TODO: Replace with actual profile picture [MML-3]  #}
+      <img src="{% static "placeholder_images/192x272.png" %}" class="img-fluid rounded-start border-end" alt="Placeholder profile picture">
+    </div>
+    <div class="col">
+      <div class="row" style="min-height: 231px;">
+        <div class="col-md-9">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row" class="col-3">Username</th>
+                <td class="col-9">{{ user }}</td>
+              </tr>
+              {% if user.first_name %}
+                <tr>
+                  <th scope="row">Name</th>
+                  <td>{{ user.first_name }} {{ user.last_name }}</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-3">test</div>
+      </div>
+      <div class="card-footer">
+        {# TODO: Replace with last online [MML-4] #}
+        <small class="text-muted">Last online yesterday</small>
+      </div>
+    </div>
+  </div>
+</div>
