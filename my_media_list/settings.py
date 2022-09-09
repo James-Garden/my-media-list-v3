@@ -85,6 +85,8 @@ DATABASES = {
         'NAME': 'my_media_list',
         'USER': 'postgres',
         'PASSWORD': 'dev',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
