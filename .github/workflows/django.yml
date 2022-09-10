@@ -52,8 +52,8 @@ jobs:
       run: |
         python manage.py migrate
       env:
-        POSTGRES_HOST: localhost
-        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+        GIT_PG_HOST: localhost
+        GIT_PG_PORT: ${{ job.services.postgres.ports[5432] }}
     - name: Run Tests
       run: |
         python manage.py test

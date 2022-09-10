@@ -98,8 +98,8 @@ if 'POSTGRES_HOST' in os.environ:
             'NAME': 'my_media_list',
             'USER': 'postgres',
             'PASSWORD': 'dev',
-            'HOST': os.environ['POSTGRES_HOST'],
-            'PORT': os.environ['POSTGRES_PORT']
+            'HOST': os.environ['GIT_PG_HOST'],
+            'PORT': os.environ['GIT_PG_PORT']
         }
     }
 
