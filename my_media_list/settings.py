@@ -99,7 +99,7 @@ if 'POSTGRES_HOST' in os.environ:
             'USER': 'postgres',
             'PASSWORD': 'dev',
             'HOST': os.environ['POSTGRES_HOST'],
-            'PORT': os.environ['POSTGRES_PORT']
+            'PORT': os.environ['POSTGRES_PORT'],
         }
     }
 
