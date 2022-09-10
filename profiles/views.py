@@ -7,7 +7,7 @@ from accounts.models import User
 
 
 class ProfileView(TemplateView):
-    template_name = "accounts/profile.html"
+    template_name = "profiles/profile.html"
     extra_context = {}
     profile_user = None
 
