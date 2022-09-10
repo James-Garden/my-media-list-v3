@@ -1,5 +1,4 @@
 from django.contrib.messages import get_messages
-from django.db.models import QuerySet
 from django.test import TestCase
 from django.urls import reverse
 
