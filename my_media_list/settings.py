@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import os
 import os.path
 from pathlib import Path
 
@@ -85,10 +86,22 @@ DATABASES = {
         'NAME': 'my_media_list',
         'USER': 'postgres',
         'PASSWORD': 'dev',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '5432'
     }
 }
+
+if 'POSTGRES_HOST' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'my_media_list',
+            'USER': 'postgres',
+            'PASSWORD': 'dev',
+            'HOST': os.environ['POSTGRES_HOST'],
+            'PORT': os.environ['POSTGRES_PORT']
+        }
+    }
 
 
 # Password validation
