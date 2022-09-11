@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'utils',
     'accounts',
     'profiles',
+    'media',
     'search',
     'compressor',
     'django.contrib.admin',
