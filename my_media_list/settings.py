@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'utils',
+    'home',
     'accounts',
     'profiles',
     'media',
