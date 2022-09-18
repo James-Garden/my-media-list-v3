@@ -1,6 +1,6 @@
 from typing import Dict
 
-from django.db import models, transaction
+from django.db import models, transaction, IntegrityError
 from django.db.models import Q
 
 BBFC_RATINGS = [
@@ -24,7 +24,6 @@ class Media(models.Model):
         (SERIES, "Series"),
         (BOOK, "Book")
     ]
-    PREQUEL = 'P'
     SEQUEL = 'S'
     RELATED = 'R'
 
@@ -55,23 +54,26 @@ class Media(models.Model):
         self.add_related_media(sequel, relationship=Media.SEQUEL)
 
     def add_prequel(self, prequel):
-        self.add_related_media(prequel, relationship=Media.PREQUEL)
+        self.add_related_media(media1=self, media2=prequel, relationship=Media.SEQUEL)
 
-    def add_related_media(self, media, *, relationship=RELATED):
-        RelatedMedia.objects.create(media1=media, media2=self, relationship=relationship)
+    def add_related_media(self, media1, *, relationship=RELATED, media2=None):
+        if media2 is None:
+            media2 = self
+        if RelatedMedia.objects.filter(Q(media1=media1) & Q(media2=media2) | Q(media2=media1) & Q(media1=media2)):
+            raise IntegrityError(f"Key pair ({media1.pk}, {media2.pk}) already exists, remove it first")
+        RelatedMedia.objects.create(media1=media1, media2=media2, relationship=relationship)
+
+    def delete_related_media(self, media):
+        RelatedMedia.objects.get(Q(media1=self) & Q(media2=media) | Q(media2=self) & Q(media1=media)).delete()
 
     def get_sequels(self):
         """Gets a QuerySet of Media objects to which self is a prequel, or which are sequel to self"""
-        qs = RelatedMedia.objects.filter(
-            (Q(media1=self) & Q(relationship=Media.PREQUEL)) |
-            (Q(media2=self) & Q(relationship=Media.SEQUEL)))
+        qs = RelatedMedia.objects.filter((Q(media2=self) & Q(relationship=Media.SEQUEL)))
         return self._get_related_from_qs(qs)
 
     def get_prequels(self):
         """Gets a QuerySet of Media objects to which self is a sequel, or which are prequel to self"""
-        qs = RelatedMedia.objects.filter(
-            (Q(media1=self) & Q(relationship=Media.SEQUEL)) |
-            (Q(media2=self) & Q(relationship=Media.PREQUEL)))
+        qs = RelatedMedia.objects.filter((Q(media1=self) & Q(relationship=Media.SEQUEL)))
         return self._get_related_from_qs(qs)
 
     def get_related_media(self):
@@ -114,7 +116,6 @@ class Media(models.Model):
 
 class RelatedMedia(models.Model):
     RELATIONSHIPS = [
-        (Media.PREQUEL, "Prequel"),
         (Media.SEQUEL, "Sequel"),
         (Media.RELATED, "Related")
     ]
