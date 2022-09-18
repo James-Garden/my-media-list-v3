@@ -51,3 +51,10 @@ class RelatedMediaTests(TestCase):
         RelatedMedia.objects.create(media1=self.media1, media2=self.media3, relationship=Media.RELATED)
         RelatedMedia.objects.create(media1=self.media4, media2=self.media1, relationship=Media.SEQUEL)
         self.assertQuerysetEqual(self.media1.get_related_media(), [self.media2, self.media3], ordered=False)
+
+    def test_delete_related_media(self):
+        self.media1.add_related_media(self.media2)
+
+        self.media1.delete_related_media(self.media2)
+
+        self.assertQuerysetEqual(RelatedMedia.objects.all(), [])
