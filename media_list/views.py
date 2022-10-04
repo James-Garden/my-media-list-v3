@@ -4,7 +4,7 @@ from media_list.models import ListEntry
 from utils.views import BaseTemplateView, get_user_from_url
 
 
-class BaseListView(BaseTemplateView):
+class AbstractListView(BaseTemplateView):
     template_name = "media_list/list.html"
     page_user = None
     query_callback = None
@@ -25,16 +25,16 @@ class BaseListView(BaseTemplateView):
         return self.render_to_response(context)
 
 
-class BookListView(BaseListView):
+class BookListView(AbstractListView):
     query_callback = ListEntry.get_user_book_list
     list_name = "Book List"
 
 
-class FilmListView(BaseListView):
+class FilmListView(AbstractListView):
     query_callback = ListEntry.get_user_film_list
     list_name = "Film List"
 
 
-class SeriesListView(BaseListView):
+class SeriesListView(AbstractListView):
     query_callback = ListEntry.get_user_series_list
     list_name = "Series List"
