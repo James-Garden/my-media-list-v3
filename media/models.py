@@ -108,7 +108,7 @@ class Media(models.Model):
         return media_args, type_args
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(title={self.title!r}, type={self.get_media_type_display()!r})"
+        return f"<{self.__class__.__name__}[title={self.title!r}, type={self.get_media_type_display()!r}]>"
 
     def __str__(self):
         return self.title
